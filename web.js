@@ -13,7 +13,8 @@ const resultsContainer = document.getElementById('search-results');
 // 1. جلب البيانات من ملف JSON
 async function loadQuotes() {
     try {
-        const response = await fetch(`data.json?v=${new Date().getTime()}`);
+        // استبدل الرابط أدناه برابط الـ Raw الذي نسخته من حسابك
+const response = await fetch(`https://raw.githubusercontent.com/Colja37/nahj-api/main/data.json?v=${new Date().getTime()}`);
         quotesDatabase = await response.json();
         // عرض عبارة عشوائية فور تحميل الموقع
         displayRandomQuote();
