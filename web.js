@@ -10,12 +10,31 @@ const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
 const resultsContainer = document.getElementById('search-results');
 
-// 1. جلب البيانات من ملف JSON
+// 1. جلب البيانات من ملف JSON وتنظيف التكرار وإعادة الترقيم تلقائياً
 async function loadQuotes() {
     try {
-        // استبدل الرابط أدناه برابط الـ Raw الذي نسخته من حسابك
-const response = await fetch(`https://raw.githubusercontent.com/Colja37/nahj-api/main/data.json?v=${new Date().getTime()}`);
-        quotesDatabase = await response.json();
+        // استخدم رابط الـ Raw الخاص بك هنا
+        const response = await fetch(`data.json?v=${new Date().getTime()}`);
+        const rawData = await response.json();
+        
+        const seenTexts = new Set();
+        let currentId = 1; // نبدأ الترقيم من 1 بالتسلسل
+
+        quotesDatabase = rawData
+            .filter(item => {
+                const cleanedText = item.text.trim();
+                if (seenTexts.has(cleanedText)) {
+                    return false; // مكرر، احذفه
+                }
+                seenTexts.add(cleanedText);
+                return true; // فريد، احفظه
+            })
+            .map(item => {
+                // هُنا السحر: نعيد تعيين الـ id ليكون متسلسلاً بدون فراغات
+                item.id = currentId++;
+                return item;
+            });
+
         // عرض عبارة عشوائية فور تحميل الموقع
         displayRandomQuote();
     } catch (error) {
