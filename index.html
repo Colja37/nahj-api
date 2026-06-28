@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nahj API | مولد عبارات نهج البلاغة</title>
+    <link rel="stylesheet" href="web.css">
+    <!-- استدعاء خطوط عربية أنيقة من جوجل -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Nahj API</h1>
+            <p class="subtitle">مولد ومحرك بحث عبارات وحكم نهج البلاغة</p>
+        </header>
+
+        <!-- بطاقة العرض الرئيسية -->
+        <main class="quote-card">
+            <div class="card-header">
+                <span id="quote-category" class="badge">جاري التحميل...</span>
+                <span id="quote-id" class="quote-number">#0</span>
+            </div>
+            <div class="card-body">
+                <p id="quote-text" class="text-content">بانتظار تحميل العبارات...</p>
+            </div>
+            <div class="card-footer">
+                <button id="next-btn" class="btn btn-primary">عبارة عشوائية 🎲</button>
+                <button id="copy-btn" class="btn btn-secondary">نسخ النص 📋</button>
+            </div>
+        </main>
+
+        <!-- قسم البحث والتصفية -->
+        <section class="search-section">
+            <h3>محرك البحث والتصفية</h3>
+            <div class="search-controls">
+                <input type="text" id="search-input" placeholder="اكتب كلمة للبحث في النصوص...">
+                <select id="category-filter">
+                    <option value="all">كل التبويبات</option>
+                    <option value="حكمة">حكم</option>
+                    <option value="خطبة">خطب</option>
+                    <option value="رسالة">رسائل</option>
+                </select>
+            </div>
+            <!-- نتائج البحث السريعة -->
+            <div id="search-results" class="results-container"></div>
+        </section>
+    </div>
+
+    <script src="web.js"></script>
+</body>
+</html>
