@@ -1,0 +1,30 @@
+name: Daily Nahj Quote Bot
+
+on:
+  schedule:
+    # تشغيل الكود يومياً الساعة 9:00 صباحاً بتوقيت جرينتش (GMT)
+    # وهو ما يعادل تماماً الساعة 12:00 ظهراً بتوقيت السعودية (KSA)
+    - cron: '0 9 * * *'
+  workflow_dispatch: # يتيح لك هذا الخيار تشغيل البوت يدوياً للتجربة في أي وقت
+
+jobs:
+  send-quote:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install Dependencies
+      run: |
+        pip install requests
+
+    - name: Run Bot Script
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      run: python bot.py
