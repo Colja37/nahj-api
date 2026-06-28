@@ -13,7 +13,7 @@ const resultsContainer = document.getElementById('search-results');
 // 1. جلب البيانات من ملف JSON
 async function loadQuotes() {
     try {
-        const response = await fetch('data.json');
+        const response = await fetch(`data.json?v=${new Date().getTime()}`);
         quotesDatabase = await response.json();
         // عرض عبارة عشوائية فور تحميل الموقع
         displayRandomQuote();
